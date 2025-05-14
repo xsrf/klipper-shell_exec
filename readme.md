@@ -5,6 +5,15 @@ I made it so I can make my Anycubic Kobra S1 with [Rinkhals](https://github.com/
 
 ## Installation on Anycubic printers with Rinkhals
 
+### Via *.swu
+
+- download the *.swu file for your printer from [Releases](https://github.com/xsrf/klipper-shell_exec/releases)
+- rename it to `update.swu` and place it on a USB stick into the folder `aGVscF9zb3Nf`
+- plug the USB stick into your powered printer - it will beep when it sees the install and beep again when it finished installing
+- enable "shell_exec" in the Rinhals menu on your printer (Settings - General - Rinkhals)
+
+### Manually
+
 For now, push `/apps/shell_exec/*` to `/useremain/home/rinkhals/apps/shell_exec/*` using SSH, SCP or e.g. ADB:
 ```
 adb push apps/shell_exec /useremain/home/rinkhals/apps
@@ -12,7 +21,7 @@ adb shell chmod +x /useremain/home/rinkhals/apps/shell_exec/app.sh
 ```
 Afterwards enable "shell_exec" in the rinkhals interface.
 
-See https://github.com/jbatonnet/Rinkhals.apps/ for details on how to run and deploy apps. I will provide an `update.swu` later.
+See https://github.com/jbatonnet/Rinkhals.apps/ for details on how to run and deploy apps.
 
 ## Installation on other Klipper based printers
 
