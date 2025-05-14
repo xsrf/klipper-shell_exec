@@ -1,16 +1,14 @@
-# shell_exec Makro for Klipper
+# shell_exec macro for Klipper
 
-This is a basic Klipper extension that allows you to run shell code within Klipper Macros (probably not the best idea).
+This is a basic Klipper extension that allows you to run shell code within Klipper macros (probably not the best idea).
 I made it so I can make my Anycubic Kobra S1 with [Rinkhals](https://github.com/jbatonnet/Rinkhals) 🎶 *beep* 🎶 using `M300` gcode.
 
 ## Installation on Anycubic printers with Rinkhals
 
-For now, push the files of this repo to `/useremain/home/rinkhals/apps/shell_exec` using SSH, SFTP or e.g. ADB:
+For now, push `/apps/shell_exec/*` to `/useremain/home/rinkhals/apps/shell_exec/*` using SSH, SCP or e.g. ADB:
 ```
-adb push app.sh /useremain/home/rinkhals/apps/shell_exec
-adb push app.json /useremain/home/rinkhals/apps/shell_exec
-adb push shell_exec.sh /useremain/home/rinkhals/apps/shell_exec
-adb shell chmod +x /useremain/home/rinkhals/apps/shell_exec/shell_exec.sh
+adb push apps/shell_exec /useremain/home/rinkhals/apps
+adb shell chmod +x /useremain/home/rinkhals/apps/shell_exec/app.sh
 ```
 Afterwards enable "shell_exec" in the rinkhals interface.
 
@@ -21,6 +19,7 @@ See https://github.com/jbatonnet/Rinkhals.apps/ for details on how to run and de
 Just somehow run `shell_exec.sh` on the device running Klipper. Make sure to also change the Klipper Unix Domain Socket within `shell_exec.sh` if you Klipper installation is not running on the default `/tmp/unix_uds1`.
 
 ## Usage
+
 Use the `action_call_remote_method("shell_exec",cmd)` method in your `printer.cfg` to execute shell commands within your printer macros. The following examples are writte for GoKlipper on Anycubic printers.
 On a printer with rinkhals, consider putting this into `/useremain/home/rinkhals/printer_data/config/printer.custom.cfg` (see [here](https://jbatonnet.github.io/Rinkhals/Rinkhals/printer-configuration/))
 
