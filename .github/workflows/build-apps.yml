@@ -1,0 +1,18 @@
+name: Build apps
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build-apps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          docker run --rm -v ${{ github.workspace }}/build:/build -v ${{ github.workspace }}/apps:/apps ghcr.io/jbatonnet/rinkhals/build /bin/bash -c "chmod +x /build/build-all-swus.sh && /build/build-all-swus.sh"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: update.swu
+          path: |
+            build/dist/update-*.swu
