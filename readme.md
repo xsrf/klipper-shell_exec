@@ -55,3 +55,8 @@ gcode:
     BEEP_OFF
 ```
 For some reason the `G4 P{params.P}` is not working as pause inside the macro - so `M300` is still kinda broken. It's not because of the parameter, even `G4 P2000` won't cause a pause inside the macro. It works in gcode though 🤔
+
+# Debugging
+
+All executed commands are logged to `/tmp/shell_exec.log`. Errors may show up in GoKlippers log in `/tmp/gklib.log`.
+With ADB installed and connected (`adb connect $IP`), view live via `adb shell tail -f /tmp/shell_exec.log -f /tmp/gklib.log`.
