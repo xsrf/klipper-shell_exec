@@ -68,7 +68,7 @@ description: Beep! S:Frequency[Hz] P:Duration[ms] e.g. M300 S1000 P200
 gcode:
     {{action_call_remote_method("shell_exec", params)}}
 ```
-This will look for `M300.sh` on the USB stick in `schell_exec_scripts` or `/useremain/home/shell_exec_scripts` and execute it, also passing all the parameters.
+This will look for `M300.sh` on the USB stick in `shell_exec_scripts` or `/useremain/home/shell_exec_scripts` and execute it, also passing all the parameters.
 
 `{{action_call_remote_method("shell_exec", "echo 42")}}` causes a syntax error, the 2nd argumant must always be a variable. That's why `cmd` is used above. `params` and `rawparams` are predefined variables set by klipper.
 
