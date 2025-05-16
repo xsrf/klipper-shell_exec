@@ -77,6 +77,8 @@ gcode:
 ```
 For some reason `G4 Pxxx` is not working as pause inside the macros btw 🤔
 
+You may use the provided `printer.custom.cfg` and `M300.sh`.
+
 # Debugging
 
 All received actions and executed commands are logged to `/tmp/shell_exec.log`. Errors may show up in GoKlippers log in `/tmp/gklib.log`.
