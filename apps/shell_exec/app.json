@@ -2,5 +2,5 @@
     "$version": "1",
     "name": "shell_exec Macro",
     "description": "shell_exec Macro for Klipper",
-    "version": "0.2"
+    "version": "0.3"
 }
