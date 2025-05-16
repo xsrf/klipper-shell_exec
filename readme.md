@@ -40,6 +40,7 @@ If it's an object, it's assumed the `params` object was passed, which contains t
 The following examples are written for GoKlipper on Anycubic printers.
 On a printer with rinkhals, consider putting this into `/useremain/home/rinkhals/printer_data/config/printer.custom.cfg` (see [here](https://jbatonnet.github.io/Rinkhals/Rinkhals/printer-configuration/)) or in `printer.custom.cfg` on the USB stick.
 
+### Execute command from macro
 ```
 [gcode_macro BEEP_ON]
 description: Beeper ON
@@ -52,32 +53,26 @@ description: Beeper OFF
 gcode:
     {% set cmd = "echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable" %}
     {{action_call_remote_method("shell_exec", cmd)}}
-
-[gcode_macro BEEP]
-description: Short Beep
-gcode:
-    BEEP_ON
-    G4 P300
-    BEEP_OFF
-
-[gcode_macro M300]
-description: Beep! S:Frequency[Hz] P:Duration[ms] e.g. M1338 S100 P200
-gcode:
-    {{action_call_remote_method("shell_exec", params)}}
-
+```
+### Execute command via gcode (really not recommended!)
+```
 [gcode_macro M1337]
 description: Execute shell command, e.g. M1337 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 gcode:
     {{action_call_remote_method("shell_exec", rawparams)}}
-
-[gcode_macro M1338]
-description: Execute shell script with GCode params, e.g. "M1338 S100 P200" to call /mnt/udisk/shell_exec_scripts/M1338.sh
+```
+### Execute code specific script
+```
+[gcode_macro M300]
+description: Beep! S:Frequency[Hz] P:Duration[ms] e.g. M300 S1000 P200
 gcode:
     {{action_call_remote_method("shell_exec", params)}}
 ```
-For some reason `G4 Pxxx` is not working as pause inside the macros btw 🤔
+This will look for `M300.sh` on the USB stick in `schell_exec_scripts` or `/useremain/home/shell_exec_scripts` and execute it, also passing all the parameters.
 
-You may use the provided `printer.custom.cfg` and `M300.sh`.
+`{{action_call_remote_method("shell_exec", "echo 42")}}` causes a syntax error, the 2nd argumant must always be a variable. That's why `cmd` is used above. `params` and `rawparams` are predefined variables set by klipper.
+
+You may refer to the provided `printer.custom.cfg` and `M300.sh` for further examples.
 
 # Debugging
 
