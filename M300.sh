@@ -11,10 +11,21 @@
 
 duration=$(echo "$1" | jq -r '.params?.P?|strings')
 duration=${duration:-500}
+
+# set bounds
+(( duration < 0 )) && duration=0
+(( duration > 30000 )) && duration=30000
+
 usduration=$((duration * 1000))
 
 freq=$(echo "$1" | jq -r '.params?.S?|strings')
 freq=${freq:-1000}
+
+# S0 is used as pause only, no sound
+(( freq == 0 )) && usleep $usduration && exit 0
+# set bounds
+(( freq < 10 )) && freq=10
+(( freq > 10000 )) && freq=10000
 
 period=$((1000000000 / $freq))
 duty_cycle=$(($period / 2))
