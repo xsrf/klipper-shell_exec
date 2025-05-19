@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script implements M300 (Beep)
-# Place it either in 
+# Place it either in "/useremain/home/shell_exec_scripts" or "shell_exec_scripts" on the USB stick
 # Command JSON can be found in $1
 # e.g. {"action":"shell_exec","params":{"M":"1338","P":"77","S":"1"}} for "M1338 P77 S1"
 # Default Beep is 2500 HZ with:
@@ -40,7 +40,7 @@ echo $period > /sys/class/pwm/pwmchip0/pwm0/period
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 # sleep
 usleep $usduration
-# disbale beeper
+# disable beeper
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 # reset pwm0 to default values
 echo 400000 > /sys/class/pwm/pwmchip0/pwm0/period
